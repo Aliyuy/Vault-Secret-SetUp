@@ -107,4 +107,5 @@ echo "Script execution completed successfully."
 #./automate_secret_expiry.sh
 
 
+# Create s3 on cli: aws s3api create-bucket --bucket vault-email-logs --region your-aws-region
 
