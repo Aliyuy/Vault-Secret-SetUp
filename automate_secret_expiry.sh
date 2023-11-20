@@ -94,5 +94,11 @@ crontab -e
 curl -O https://releases.hashicorp.com/vault/$(curl -s https://releases.hashicorp.com/vault/ | grep -E 'href.*vault_[0-9]' | sed -E 's/.*href="([^"]+)".*/\1/' | head -n 1)
 
 # Install Vault
-sudo unzip vault_*_linux_amd64.zip -d /usr/local/bin
+sudo unzip vault_*_linux_amd64.zip -d /usr/local/bin# Replace VERSION with the desired Vault version, e.g., 1.8.2
+export VAULT_VERSION=1.8.2
+wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
+unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin
+
+
+
 
