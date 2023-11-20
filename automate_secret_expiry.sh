@@ -1,111 +1,91 @@
-#check_secret_expiry.sh
+# 1- Enable the Key-Value Secrets Engine:
+
+#Enable the Key-Value (KV) secrets engine. For example, enable version 2:
+
+vault secrets enable -path=secrets kv-v2
+
+# 2- Configure AWS Secrets Engine:
+#Enable the AWS Secrets Engine and configure it with appropriate AWS credentials:
+
+vault secrets enable -path=aws aws
+vault write aws/config/root access_key=YOUR_AWS_ACCESS_KEY secret_key=YOUR_AWS_SECRET_KEY region=us-east-1
+
+# 3- Create AWS IAM Role in Vault:
+#Create an AWS IAM role in Vault that will be used for dynamic AWS credentials:
+
+vault write aws/roles/my-role \
+  credential_type=iam_user \
+  policy_document=-<<EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": "ec2:DescribeInstances",
+        "Resource": "*"
+      }
+    ]
+  }
+  EOF
+
+# 4- Write a Secret to Vault: Write a Secret with Expiration Date
+#Store your secret in Vault with an associated expiration date. For example:
+
+vault kv put secrets/my-secret my-key=my-value expire_time=$(date -d "7 days" -u +"%Y-%m-%dT%H:%M:%SZ")
+
+#Set Up AWS SNS for Email Notifications
+# 5- Create an SNS Topic:
+#Create an SNS topic to which the email notifications will be published:
+
+aws sns create-topic --name VaultSecretExpiration
+
+# 6- Subscribe to the SNS Topic:
+#Subscribe your email address (or the email address of the recipient) to the SNS topic:
+
+aws sns subscribe --topic-arn YOUR_SNS_TOPIC_ARN --protocol email --notification-endpoint YOUR_EMAIL_ADDRESS
+
+#Create a Script to Check Expiration and Trigger Notification
+# 7- Create a Script:
+#Create a script (e.g., check_secret_expiry.sh) that checks the expiration time and triggers an email notification using AWS SNS.
+
 #!/bin/bash
 
-secret_data=$(vault kv get -format=json secrets/my-secret)
+# Set your AWS region
+AWS_REGION="us-east-1"
 
-# Extract the expiration time from the secret
-expiration_time=$(echo $secret_data | jq -r .data.data.expire_time)
+# Set your AWS SNS topic ARN
+SNS_TOPIC_ARN="YOUR_SNS_TOPIC_ARN"
+
+# Get the expiration time from Vault
+expire_time=$(vault kv get -format=json secrets/my-secret | jq -r '.data.data.expire_time')
 
 # Calculate the time 7 days before expiration
-notify_time=$(date -d "$expiration_time - 7 days" "+%Y-%m-%dT%H:%M:%SZ")
+notify_time=$(date -d "$expire_time - 7 days" "+%Y-%m-%dT%H:%M:%SZ")
 
 # Get the current time
 current_time=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
 
 if [ "$current_time" == "$notify_time" ]; then
-  # Send an email notification here
-  # (Replace the following line with your email notification logic)
-  echo "The secret is expiring in 7 days. Please take action." | mail -s "Secret Expiration Reminder" your@email.com
+  # Send an email notification using AWS SNS
+  aws sns publish --topic-arn $SNS_TOPIC_ARN --message "The secret is expiring in 7 days. Please take action."
 fi
 
+# 8- Make the Script Executable:
+#Make the script executable:
 
+chmod +x check_secret_expiry.sh
 
-#automate_secret_expiry.sh
+#Schedule the Script Execution
+# 9- Schedule with Cron:
+#Add a cron job to schedule the script execution. Open the crontab for editing:
 
-#!/bin/bash
+crontab -e
 
-# Set your Vault address
-VAULT_ADDR="https://your-vault-address"
+# 10- Add a line to run the script daily:
 
-# Set AWS region
-AWS_REGION="your-aws-region"
+0 0 * * * /path/to/check_secret_expiry.sh
 
-# Set your AWS credentials
-AWS_ACCESS_KEY="your-aws-access-key"
-AWS_SECRET_KEY="your-aws-secret-key"
-
-# Set the path to your script that checks secret expiry and sends email
-CHECK_EXPIRY_SCRIPT_PATH="/path/to/check_secret_expiry.sh"
-
-# Function to check if a Vault token is present or obtain a new one
-get_vault_token() {
-    if [[ -z "${VAULT_TOKEN}" ]]; then
-        # Authenticate to Vault and set the token
-        VAULT_TOKEN=$(vault login -method=aws role=my-role -format=json | jq -r '.auth.client_token')
-        export VAULT_TOKEN
-    fi
-}
-
-# Function to write a secret to Vault with an expiration date
-write_secret_to_vault() {
-    vault kv put secrets/my-secret my-key=my-value expire_time=$(date -d "7 days" -u +"%Y-%m-%dT%H:%M:%SZ")
-}
-
-# Function to schedule a cron job for checking secret expiration and sending email
-schedule_cron_job() {
-    # Add a cron job to run the expiration check script
-    (crontab -l ; echo "0 0 * * * ${CHECK_EXPIRY_SCRIPT_PATH}") | crontab -
-}
-
-# Function to set up AWS SES for email notifications
-configure_aws_ses() {
-    # Configure AWS SES for email notifications
-    aws ses create-receipt-rule-set --rule-set-name vault-email-notifications
-    aws ses create-receipt-rule --rule-set-name vault-email-notifications \
-        --rule-name vault-email-rule \
-        --enabled \
-        --recipients "recipient@example.com" \
-        --actions S3Action="{BucketName=vault-email-logs,objectkeyprefix=email/}"
-}
-
-# Main Script
-
-# Set AWS CLI credentials
-export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY}"
-export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_KEY}"
-export AWS_DEFAULT_REGION="${AWS_REGION}"
-
-# Set Vault address
-export VAULT_ADDR="${VAULT_ADDR}"
-
-# Authenticate to Vault
-get_vault_token
-
-# Write a secret to Vault with an expiration date
-write_secret_to_vault
-
-# Schedule a cron job for checking secret expiration and sending email
-schedule_cron_job
-
-# Configure AWS SES for email notifications
-configure_aws_ses
-
-# Clean up environment variables
-unset AWS_ACCESS_KEY_ID
-unset AWS_SECRET_ACCESS_KEY
-unset AWS_DEFAULT_REGION
-unset VAULT_ADDR
-unset VAULT_TOKEN
-
-echo "Script execution completed successfully."
-
-
-#chmod +x automate_secret_expiry.sh
-#chmod +x check_secret_expiry.sh
-
-#./check_secret_expiry.sh
-#./automate_secret_expiry.sh
-
-
-# Create s3 on cli: aws s3api create-bucket --bucket vault-email-logs --region your-aws-region
-
+#Run the Script Manually:
+#Run the script manually to ensure it correctly calculates the notification time and triggers the email notification using AWS SNS.
+#Wait for Scheduled Execution:
+#Wait for the scheduled cron job to execute and verify that the email notification is sent when the secret is about to expire.
