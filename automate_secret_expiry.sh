@@ -99,6 +99,18 @@ export VAULT_VERSION=1.8.2
 wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
 unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin
 
+# Replace VERSION with the desired Vault version, e.g., 1.8.2
+export VAULT_VERSION=1.8.2
+
+# Download the Vault binary
+wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
+
+# Unzip and install Vault
+unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin
+
+
+
+
 
 
 
