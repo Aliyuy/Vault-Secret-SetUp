@@ -111,6 +111,6 @@ unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin
 
 
 
-
+Error enabling: Post "https://vault-test2.fsndbx.net/v1/sys/mounts/secrets": dial tcp: lookup vault-test2.fsndbx.net on 10.108.116.2:53: no such host
 
 
