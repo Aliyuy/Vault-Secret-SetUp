@@ -27,6 +27,12 @@ vault write aws/roles/my-role \
     ]
   }
   EOF
+  
+  vault write aws/roles/my-role credential_type=iam_user policy_document="{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"ec2:DescribeInstances\",\"Resource\":\"*\"}]}"
+
+  vault write aws/roles/my-role \
+  credential_type=iam_user \
+  policy_document="{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"ec2:DescribeInstances\",\"Resource\":\"*\"}]}"
 
 # 4- Write a Secret to Vault: Write a Secret with Expiration Date
 #Store your secret in Vault with an associated expiration date. For example:
