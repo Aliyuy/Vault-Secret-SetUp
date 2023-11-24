@@ -31,8 +31,8 @@ vault write aws/roles/my-role \
   vault write aws/roles/my-role credential_type=iam_user policy_document="{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"ec2:DescribeInstances\",\"Resource\":\"*\"}]}"
 
   vault write aws/roles/my-role \
-  credential_type=iam_user \
-  policy_document="{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"ec2:DescribeInstances\",\"Resource\":\"*\"}]}"
+    credential_type=iam_user \
+    policy_document="{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"ec2:DescribeInstances\",\"Resource\":\"*\"}]}"
 
 # 4- Write a Secret to Vault: Write a Secret with Expiration Date
 #Store your secret in Vault with an associated expiration date. For example:
@@ -118,5 +118,8 @@ unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin
 
 
 Error enabling: Post "https://vault-test2.fsndbx.net/v1/sys/mounts/secrets": dial tcp: lookup vault-test2.fsndbx.net on 10.108.116.2:53: no such host
+
+SSL validation failed for https://sns.us-east-2.amazonaws.com/ [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
 
 
