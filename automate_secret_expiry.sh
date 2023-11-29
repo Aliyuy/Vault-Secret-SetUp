@@ -1,4 +1,4 @@
-# 1- Enable the Key-Value Secrets Engine:
+   # 1- Enable the Key-Value Secrets Engine:
 
 #Enable the Key-Value (KV) secrets engine. For example, enable version 2:
 
@@ -126,4 +126,8 @@ SSL validation failed for https://sns.us-east-2.amazonaws.com/ [SSL: CERTIFICATE
 Warning: Identity file /home/vault-sbx-us2-key.pem not accessible: No such file or directory.
 ssh: Could not resolve hostname 2-18-217-229-216: Name or service not known
 scp: Connection closed
+
+scp -i /c/Users/e5688954/Downloads/vault-sbx-us2-key.pem /c/Users/e5688954/Downloads/vault-sbx-ec2-key.pem ec2-user@2.18.217.229.216:~/
+chmod 400 /c/Users/e5688954/Downloads/vault-sbx-us2-key.pem
+
 
