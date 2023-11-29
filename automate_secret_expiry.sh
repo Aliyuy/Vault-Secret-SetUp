@@ -121,5 +121,9 @@ Error enabling: Post "https://vault-test2.fsndbx.net/v1/sys/mounts/secrets": dia
 
 SSL validation failed for https://sns.us-east-2.amazonaws.com/ [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
 
+ scp -i /home/vault-sbx-us2-key.pem /c/Users/e5688954/Downloads/vault-sbx-ec2-key.pem ec2-user@2-18-217-229-216:~/
 
+Warning: Identity file /home/vault-sbx-us2-key.pem not accessible: No such file or directory.
+ssh: Could not resolve hostname 2-18-217-229-216: Name or service not known
+scp: Connection closed
 
