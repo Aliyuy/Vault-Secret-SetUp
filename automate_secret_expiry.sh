@@ -132,4 +132,44 @@ chmod 400 /c/Users/e5688954/Downloads/vault-sbx-us2-key.pem
 
 
 https://careers.fisglobal.com/us/en/c/client-services-jobs
+import boto3
+import hvac
+
+# Vault configuration
+vault_address = 'https://your-vault-address'
+vault_token = 'your-vault-token'
+vault_secret_path = 'secret/data/your-secret'
+
+# AWS S3 configuration
+aws_access_key = 'your-aws-access-key'
+aws_secret_key = 'your-aws-secret-key'
+s3_bucket_name = 'your-s3-bucket-name'
+s3_object_key = 'backup.zip'
+
+# Connect to Vault
+vault_client = hvac.Client(url=vault_address, token=vault_token)
+
+# Retrieve the secret from Vault
+vault_response = vault_client.read(vault_secret_path)
+if vault_response and 'data' in vault_response:
+    secret_data = vault_response['data']['data']
+else:
+    print(f"Error: Unable to retrieve secret from Vault. Response: {vault_response}")
+    exit()
+
+# Your backup logic goes here...
+# This could include creating a backup of files or a database and storing it in a zip file.
+
+# Create a zip file or use any other method to package your backup data
+# For example, if you have a directory to backup, you can use the shutil module:
+# import shutil
+# shutil.make_archive('backup', 'zip', '/path/to/backup/directory')
+
+# Upload the backup to S3
+s3_client = boto3.client('s3', aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key)
+with open('backup.zip', 'rb') as backup_file:
+    s3_client.upload_fileobj(backup_file, s3_bucket_name, s3_object_key)
+
+print(f"Backup successfully uploaded to S3: s3://{s3_bucket_name}/{s3_object_key}")
+
 
