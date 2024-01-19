@@ -173,3 +173,17 @@ with open('backup.zip', 'rb') as backup_file:
 print(f"Backup successfully uploaded to S3: s3://{s3_bucket_name}/{s3_object_key}")
 
 
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::account-id:role/your-role-name"
+        }
+    ]
+}
+
+
+
