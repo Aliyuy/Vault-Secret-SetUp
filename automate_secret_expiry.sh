@@ -174,16 +174,17 @@ print(f"Backup successfully uploaded to S3: s3://{s3_bucket_name}/{s3_object_key
 
 
 
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "iam:PassRole",
-            "Resource": "arn:aws:iam::account-id:role/your-role-name"
-        }
-    ]
-}
+
+       # Download and install Vault
+sudo apt-get update
+sudo apt-get install -y unzip
+wget https://releases.hashicorp.com/vault/{version}/vault_{version}_linux_amd64.zip
+unzip vault_{version}_linux_amd64.zip
+sudo mv vault /usr/local/bin/
+
+# Verify installation
+vault --version
+
 
 
 
