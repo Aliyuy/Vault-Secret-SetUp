@@ -198,3 +198,8 @@ parse error: Invalid numeric literal at line 1, column 9
 {"request_id":"c9066e5e-8fa9-bc5f-91b5-d07274e4a831","lease_id":"","renewable":false,"lease_duration":0,"data":{"random_bytes":"TfVLaLxXFuLHYrlFDXyesl0wig36xQJ6wObgDxmwNmw="},"wrap_info":null,"warnings":null,"auth":null}
 * Connection #0 to host vault-nlb.rpsstg.awsfisretirement.net left intact
 
+
+
+
+curl -ki -vvv -X POST -H "X-Vault-Token: <VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"data": {"format": "hex"}}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | grep -oP '"random_bytes":\s*"\K[^"]+'
+
