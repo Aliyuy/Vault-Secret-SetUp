@@ -189,4 +189,7 @@ vault --version
 curl -ki -vvv -X POST -H "X-Vault-Token:<VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"format": "hex"}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | jq .
 
 
+curl -ki -vvv -X POST -H "X-Vault-Token: <VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"data": {"format": "hex"}}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | jq .
+
+
 
