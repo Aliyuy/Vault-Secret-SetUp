@@ -192,4 +192,5 @@ curl -ki -vvv -X POST -H "X-Vault-Token:<VAULT_TOKEN>" --header 'Content-Type: a
 curl -ki -vvv -X POST -H "X-Vault-Token: <VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"data": {"format": "hex"}}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | jq .
 
 
-
+ Connection #0 to host vault-nlb.rpsstg.awsfisretirement.net left intact
+parse error: Invalid numeric literal at line 1, column 9
