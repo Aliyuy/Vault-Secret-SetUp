@@ -260,5 +260,9 @@ curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to golang.org:44
 
 wget https://golang.org/dl/goVERSION.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf goVERSION.linux-amd64.tar.gz
+wget --no-check-certificate https://golang.org/dl/goVERSION.linux-amd64.tar.gz
+
+
+
 
 
