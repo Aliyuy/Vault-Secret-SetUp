@@ -223,4 +223,5 @@ Resolving golang.org (golang.org)... 172.253.122.141, 2607:f8b0:4004:c19::8d
 Connecting to golang.org (golang.org)|172.253.122.141|:443... connected.
 Unable to establish SSL connection.
 
+wget -q --no-check-certificate https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
 
