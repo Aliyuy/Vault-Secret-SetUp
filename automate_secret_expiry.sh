@@ -233,5 +233,9 @@ tar: Child returned status 2
 tar: Error is not recoverable: exiting nowtar -C /usr/local -xzf /path/to/your/home/directory/go1.21.5.linux-amd64.tar.gz
 
 
+tar -C /usr/local -xzf /path/to/your/home/directory/go1.21.5.linux-amd64.tar.gz
+
+
+
 
 
