@@ -208,6 +208,11 @@ wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION
 
 unzip vault_${VAULT_VERSION}_linux_amd64.zip
 sudo mv vault /usr/local/bin/
+wget https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
+
+sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
+
+export PATH=$PATH:/usr/local/go/bin
 
 
 
