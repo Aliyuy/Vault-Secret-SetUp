@@ -263,6 +263,9 @@ sudo tar -C /usr/local -xzf goVERSION.linux-amd64.tar.gz
 wget --no-check-certificate https://golang.org/dl/goVERSION.linux-amd64.tar.gz
 
 
+Y7BBUG4TBtkf0icOzPB3cEX36nUz0VhO    
+JGTANRGxKlWYYH29
+
 
 
 
