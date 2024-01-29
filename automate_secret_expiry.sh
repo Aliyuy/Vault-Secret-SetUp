@@ -216,4 +216,11 @@ export PATH=$PATH:/usr/local/go/bin
 
 
 
+ake: *** [check-go-version] Error 1
+[root@ip-10-109-42-174 vault]# wget https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
+--2024-01-29 19:37:21--  https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
+Resolving golang.org (golang.org)... 172.253.122.141, 2607:f8b0:4004:c19::8d
+Connecting to golang.org (golang.org)|172.253.122.141|:443... connected.
+Unable to establish SSL connection.
+
 
