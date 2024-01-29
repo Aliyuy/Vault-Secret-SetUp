@@ -249,7 +249,11 @@ curl -LO https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).li
 
 
 
-
+root@ip-10-109-42-174 vault]# curl -LO https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).linux-amd64.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0
+curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to golang.org:443
 
 
 
