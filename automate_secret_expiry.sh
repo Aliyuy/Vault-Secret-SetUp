@@ -203,3 +203,12 @@ parse error: Invalid numeric literal at line 1, column 9
 
 curl -ki -vvv -X POST -H "X-Vault-Token: <VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"data": {"format": "hex"}}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | grep -oP '"random_bytes":\s*"\K[^"]+'
 
+VAULT_VERSION="1.8.1"  # Replace with the latest version available
+wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
+
+unzip vault_${VAULT_VERSION}_linux_amd64.zip
+sudo mv vault /usr/local/bin/
+
+
+
+
