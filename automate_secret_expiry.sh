@@ -239,6 +239,15 @@ wget https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).linux-
 
 sudo tar -C /usr/local -xzf go*.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
+curl -LO https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).linux-amd64.tar.gz
+
+
+
+
+
+
+
+
 
 
 
