@@ -225,3 +225,10 @@ Unable to establish SSL connection.
 
 wget -q --no-check-certificate https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
 
+root@ip-10-109-42-174 vault]# wget -q --no-check-certificate https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
+[root@ip-10-109-42-174 vault]# tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
+tar (child): go1.21.5.linux-amd64.tar.gz: Cannot open: No such file or directory
+tar (child): Error is not recoverable: exiting now
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now
+
