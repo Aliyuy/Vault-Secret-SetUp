@@ -175,92 +175,16 @@ print(f"Backup successfully uploaded to S3: s3://{s3_bucket_name}/{s3_object_key
 
 
 
-       # Download and install Vault
-sudo apt-get update
-sudo apt-get install -y unzip
-wget https://releases.hashicorp.com/vault/{version}/vault_{version}_linux_amd64.zip
-unzip vault_{version}_linux_amd64.zip
-sudo mv vault /usr/local/bin/
-
-# Verify installation
-vault --version
-
-
-curl -ki -vvv -X POST -H "X-Vault-Token:<VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"format": "hex"}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | jq .
-
-
-curl -ki -vvv -X POST -H "X-Vault-Token: <VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"data": {"format": "hex"}}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | jq .
-
-
- Connection #0 to host vault-nlb.rpsstg.awsfisretirement.net left intact
-parse error: Invalid numeric literal at line 1, column 9
-
-{"request_id":"c9066e5e-8fa9-bc5f-91b5-d07274e4a831","lease_id":"","renewable":false,"lease_duration":0,"data":{"random_bytes":"TfVLaLxXFuLHYrlFDXyesl0wig36xQJ6wObgDxmwNmw="},"wrap_info":null,"warnings":null,"auth":null}
-* Connection #0 to host vault-nlb.rpsstg.awsfisretirement.net left intact
 
 
 
 
-curl -ki -vvv -X POST -H "X-Vault-Token: <VAULT_TOKEN>" --header 'Content-Type: application/json' -d '{"data": {"format": "hex"}}' https://vault-nlb.rpsstg.awsfisretirement.net/v1/sys/tools/random/32 | grep -oP '"random_bytes":\s*"\K[^"]+'
-
-VAULT_VERSION="1.8.1"  # Replace with the latest version available
-wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
-
-unzip vault_${VAULT_VERSION}_linux_amd64.zip
-sudo mv vault /usr/local/bin/
-wget https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
-
-sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
-
-export PATH=$PATH:/usr/local/go/bin
-
-
-
-ake: *** [check-go-version] Error 1
-[root@ip-10-109-42-174 vault]# wget https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
---2024-01-29 19:37:21--  https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
-Resolving golang.org (golang.org)... 172.253.122.141, 2607:f8b0:4004:c19::8d
-Connecting to golang.org (golang.org)|172.253.122.141|:443... connected.
-Unable to establish SSL connection.
-
-wget -q --no-check-certificate https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
-
-[root@ip-10-109-42-174 vault]# wget -q --no-check-certificate https://golang.org/dl/go1.21.5.linux-amd64.tar.gz
-[root@ip-10-109-42-174 vault]# tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
-tar (child): go1.21.5.linux-amd64.tar.gz: Cannot open: No such file or directory
-tar (child): Error is not recoverable: exiting now
-tar: Child returned status 2
-tar: Error is not recoverable: exiting nowtar -C /usr/local -xzf /path/to/your/home/directory/go1.21.5.linux-amd64.tar.gz
-
-
-tar -C /usr/local -xzf /path/to/your/home/directory/go1.21.5.linux-amd64.tar.gz
-wget https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).linux-amd64.tar.gz
-
-
-sudo tar -C /usr/local -xzf go*.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-curl -LO https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).linux-amd64.tar.gz
+Update Infrastructure for Data Loader Lambda to allow access to FIS Vault and RDS Proxy
 
 
 
 
 
-
-
-
-
-[root@ip-10-109-42-174 vault]# curl -LO https://golang.org/dl/go$(curl -s https://golang.org/VERSION?m=text).linux-amd64.tar.gz
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0
-curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to golang.org:443
-
-
-
-
-wget https://golang.org/dl/goVERSION.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf goVERSION.linux-amd64.tar.gz
-wget --no-check-certificate https://golang.org/dl/goVERSION.linux-amd64.tar.gz
 
 
 
