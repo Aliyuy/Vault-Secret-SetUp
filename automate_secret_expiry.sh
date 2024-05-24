@@ -197,4 +197,15 @@ curl -O https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-w32-2.2.27_20210311.exe
 pgp --gen-key "Alice Example <alice@example.com>" --key-type rsa --encryption-bits 2048 --signing-bits 2048 --passphrase cam3r0n --expiration-date 2007-06-01
 
 
+gpg --batch --gen-key <<EOF
+%echo Generating a basic OpenPGP key
+Key-Type: RSA
+Key-Length: 2048
+Name-Real: Alice Example
+Name-Email: alice@example.com
+Expire-Date: 0
+Passphrase: cam3r0n
+%commit
+%echo done
+EOF
 
