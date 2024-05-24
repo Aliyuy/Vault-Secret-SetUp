@@ -190,9 +190,11 @@ setx PATH "%PATH%;C:\Program Files (x86)\GnuPG\bin"
 
 
 
+curl -O https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-w32-2.2.27_20210311.exe
 
 
 
+pgp --gen-key "Alice Example <alice@example.com>" --key-type rsa --encryption-bits 2048 --signing-bits 2048 --passphrase cam3r0n --expiration-date 2007-06-01
 
 
 
