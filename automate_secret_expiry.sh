@@ -235,4 +235,7 @@ gpg --armor --export alice@example.com | clip
 gpg --armor --export alice@example.com > alice_public_key.asc
 
 
+gpg --output alice_private_key.asc --armor --export-secret-keys alice@example.com
+
+
 
