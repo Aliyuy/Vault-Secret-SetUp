@@ -174,12 +174,17 @@ print(f"Backup successfully uploaded to S3: s3://{s3_bucket_name}/{s3_object_key
 
 
 
+curl -O https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-w32-2.2.27_20210311.exe
 
 
+start gnupg-w32-2.2.27_20210311.exe
 
 
+gpg --version
 
-Update Infrastructure for Data Loader Lambda to allow access to FIS Vault and RDS Proxy
+
+setx PATH "%PATH%;C:\Program Files (x86)\GnuPG\bin"
+
 
 
 
