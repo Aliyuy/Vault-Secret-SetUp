@@ -232,4 +232,7 @@ gpg: done
 gpg --armor --export alice@example.com | clip
 
 
+gpg --armor --export alice@example.com > alice_public_key.asc
+
+
 
