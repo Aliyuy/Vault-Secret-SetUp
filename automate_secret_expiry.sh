@@ -229,4 +229,7 @@ gpg: directory '/c/Users/e5688954/.gnupg/openpgp-revocs.d' created
 gpg: revocation certificate stored as '/c/Users/e5688954/.gnupg/openpgp-revocs.d/06DE74122B0444A8ED19626117835E829C472B2F.rev'
 gpg: done
 
+gpg --armor --export alice@example.com | clip
+
+
 
