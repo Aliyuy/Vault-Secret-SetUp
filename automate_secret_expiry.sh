@@ -209,3 +209,24 @@ Passphrase: cam3r0n
 %echo done
 EOF
 
+$ gpg --batch --gen-key <<EOF
+%echo Generating a basic OpenPGP key
+Key-Type: RSA
+Key-Length: 2048
+Name-Real: Aliyu Yeh
+Name-Email: aliyu.yeh@fisglobal.com
+Expire-Date: 0
+Passphrase: cam3r0n
+%commit
+%echo done
+EOF
+gpg: directory '/c/Users/e5688954/.gnupg' created
+gpg: keybox '/c/Users/e5688954/.gnupg/pubring.kbx' created
+gpg: Generating a basic OpenPGP key
+gpg: /c/Users/e5688954/.gnupg/trustdb.gpg: trustdb created
+gpg: key 17835E829C472B2F marked as ultimately trusted
+gpg: directory '/c/Users/e5688954/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/c/Users/e5688954/.gnupg/openpgp-revocs.d/06DE74122B0444A8ED19626117835E829C472B2F.rev'
+gpg: done
+
+
